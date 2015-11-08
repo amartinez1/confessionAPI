@@ -24,11 +24,14 @@ class Confession(TimeStampedModel):
     slug = AutoSlugField(populate_from='title', unique=True, max_length=50)
     score = models.IntegerField(default=0)
     posted = models.DateTimeField(auto_now_add=True, editable=False)
-    category = models.ForeignKey(Category)
+    categories = models.ManyToManyField(Category)
     user = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.title
+
+    def get_categories(self):
+        return ', '.join([str(c) for c in self.categories.all()])
 
 
 class Like(TimeStampedModel):

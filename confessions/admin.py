@@ -13,11 +13,11 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class ConfessionAdmin(admin.ModelAdmin):
     date_hierarchy = 'updated_date'
-    fields = ('title', 'content', 'score', 'category', 'user')
-    list_display = ['id', 'title', 'score', 'category', 'user', 'created_date', 'updated_date']
-    list_display_links = ['id', 'title', 'category', 'user']
-    list_filter = ['title', 'user', 'category', 'user','created_date', 'updated_date']
-    search_fields = ['id', 'title', 'category', 'user', 'created_date', 'updated_date']
+    fields = ('title', 'content', 'score', 'categories', 'user')
+    list_display = ['id', 'title', 'score', 'user', 'get_categories', 'created_date', 'updated_date']
+    list_display_links = ['id', 'title', 'user']
+    list_filter = ['title', 'user', 'categories', 'user','created_date', 'updated_date']
+    search_fields = ['id', 'title', 'categories', 'user', 'created_date', 'updated_date']
 
 
 class UserAdmin(admin.ModelAdmin):
