@@ -1,8 +1,11 @@
 import django_filters
 from django.shortcuts import render, get_object_or_404
+from django.http import Http404
 
 from rest_framework import filters
 from rest_framework import generics
+
+from rest_framework.views import APIView
 
 from .models import Category, Confession, User, Like
 
@@ -10,22 +13,16 @@ from .serializers import ConfessionListSerializer
 
 
 class ConfessionFilter(django_filters.FilterSet):
-
     """
     Filter model by category or user
     """
+    user = django_filters.CharFilter(name='user__device_id')
+    categories = django_filters.CharFilter(name='categories__name')
+    
     class Meta:
         model = Confession
         fields = ['categories', 'user']
 
-
-class ConfessionList(generics.ListAPIView):
-
-    """
-    #Retrieves a list of all confessions
-    """
-    queryset = Confession.objects.all()
-    serializer_class = ConfessionListSerializer
 
 class ConfessionListFilters(generics.ListAPIView):
 	"""
@@ -41,3 +38,11 @@ class ConfessionListFilters(generics.ListAPIView):
 	queryset = Confession.objects.all()
 	serializer_class = ConfessionListSerializer
 	filter_class = ConfessionFilter
+
+class ConfessionDetail(generics.RetrieveUpdateDestroyAPIView):
+	"""
+	Retrieve, create ,update or delete a confession
+	"""
+	queryset = Confession.objects.all()
+	serializer_class = ConfessionListSerializer
+
