@@ -5,14 +5,14 @@ from autoslug import AutoSlugField
 
 
 class Category(TimeStampedModel):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50)
 
     def __unicode__(self):
         return self.name
 
 
 class User(TimeStampedModel):
-    device_id = models.CharField(max_length=50, unique=True)
+    device_id = models.CharField(max_length=50)
 
     def __unicode__(self):
         return self.device_id
@@ -32,7 +32,6 @@ class Confession(TimeStampedModel):
 
     def get_categories(self):
         return ', '.join([str(c) for c in self.categories.all()])
-
 
 class Like(TimeStampedModel):
     user = models.ForeignKey(User)

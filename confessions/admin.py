@@ -31,8 +31,8 @@ class UserAdmin(admin.ModelAdmin):
 class LikeAdmin(admin.ModelAdmin):
     date_hierarchy = 'updated_date'
     fields = ['user', 'confession']
-    list_display = ('user', 'confession', 'created_date', 'updated_date')
-    list_display_links = ('user', 'confession')
+    list_display = ('id','user', 'confession', 'created_date', 'updated_date')
+    list_display_links = ('id','user', 'confession')
     search_fields = ['user', 'confession', 'created_date', 'updated_date']
 
 admin.site.register(Confession, ConfessionAdmin)
